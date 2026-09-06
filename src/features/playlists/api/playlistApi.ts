@@ -1,0 +1,72 @@
+import type { Images } from "@/common/types";
+import {
+  type CreatePlaylistArgs,
+  type PlaylistData,
+  type PlaylistsResponse,
+  type UpdatePlaylistArgs,
+} from "./playlistsApi.types";
+import { baseApi } from "@/app/api/baseApi";
+
+export const playlistsApi = baseApi.injectEndpoints({
+  endpoints: (build) => ({
+    fetchPlaylists: build.query<PlaylistsResponse, void>({
+      query: () => ({ url: `playlists` }),
+      providesTags: ["Playlist"],
+    }),
+    createPlaylists: build.mutation<{ data: PlaylistData }, CreatePlaylistArgs>(
+      {
+        query: (body) => ({
+          url: "playlists",
+          method: "post",
+          body: {
+            data: {
+              type: "playlists",
+              attributes: {
+                title: body.title,
+                description: body.description,
+              },
+            },
+          },
+        }),
+        invalidatesTags: ["Playlist"],
+      },
+    ),
+    deletePlaylists: build.mutation<void, string>({
+      query: (playlistId) => ({
+        url: `playlists/${playlistId}`,
+        method: "delete",
+      }),
+      invalidatesTags: ["Playlist"],
+    }),
+    updatePlaylists: build.mutation<void,{ playlistId: string; body: UpdatePlaylistArgs }>({
+      query: ({ playlistId, body }) => ({
+        url: `playlists/${playlistId}`,
+        method: "put",
+        body: {
+          data: {
+            type: "playlists",
+            attributes: {
+              title: body.title,
+              description: body.description,
+              tagIds: body.tagIds ?? [],
+            },
+          },
+        },
+      }),
+      invalidatesTags: ["Playlist"],
+    }),
+uploadPlaylistCover: build.mutation<Images, { playlistId: string; file: File }>({
+      query: ({ playlistId, file }) => {
+        const formData = new FormData()
+        formData.append('file', file)
+        return {
+          url: `playlists/${playlistId}/images/main`,
+          method: 'post',
+          body: formData,
+        }
+      },
+      invalidatesTags: ['Playlist'],
+    }),
+  }),
+});
+export const {useFetchPlaylistsQuery, useCreatePlaylistsMutation, useDeletePlaylistsMutation, useUpdatePlaylistsMutation, useUploadPlaylistCoverMutation} = playlistsApi;
