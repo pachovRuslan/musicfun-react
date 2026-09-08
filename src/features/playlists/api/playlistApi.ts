@@ -1,6 +1,7 @@
 import type { Images } from "@/common/types";
 import {
   type CreatePlaylistArgs,
+  type FetchPlaylistsArgs,
   type PlaylistData,
   type PlaylistsResponse,
   type UpdatePlaylistArgs,
@@ -9,8 +10,8 @@ import { baseApi } from "@/app/api/baseApi";
 
 export const playlistsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    fetchPlaylists: build.query<PlaylistsResponse, void>({
-      query: () => ({ url: `playlists` }),
+    fetchPlaylists: build.query<PlaylistsResponse, FetchPlaylistsArgs>({
+      query: (params) => ({ url: `playlists`, params }),
       providesTags: ["Playlist"],
     }),
     createPlaylists: build.mutation<{ data: PlaylistData }, CreatePlaylistArgs>(
@@ -38,7 +39,10 @@ export const playlistsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Playlist"],
     }),
-    updatePlaylists: build.mutation<void,{ playlistId: string; body: UpdatePlaylistArgs }>({
+    updatePlaylists: build.mutation<
+      void,
+      { playlistId: string; body: UpdatePlaylistArgs }
+    >({
       query: ({ playlistId, body }) => ({
         url: `playlists/${playlistId}`,
         method: "put",
@@ -55,18 +59,35 @@ export const playlistsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Playlist"],
     }),
-uploadPlaylistCover: build.mutation<Images, { playlistId: string; file: File }>({
+    uploadPlaylistCover: build.mutation<
+      Images,
+      { playlistId: string; file: File }
+    >({
       query: ({ playlistId, file }) => {
-        const formData = new FormData()
-        formData.append('file', file)
+        const formData = new FormData();
+        formData.append("file", file);
         return {
           url: `playlists/${playlistId}/images/main`,
-          method: 'post',
+          method: "post",
           body: formData,
-        }
+        };
       },
-      invalidatesTags: ['Playlist'],
+      invalidatesTags: ["Playlist"],
+    }),
+    deletePlaylistCover: build.mutation<void, { playlistId: string }>({
+      query: ({ playlistId }) => ({
+        url: `playlists/${playlistId}/images/main`,
+        method: "delete",
+      }),
+      invalidatesTags: ["Playlist"],
     }),
   }),
 });
-export const {useFetchPlaylistsQuery, useCreatePlaylistsMutation, useDeletePlaylistsMutation, useUpdatePlaylistsMutation, useUploadPlaylistCoverMutation} = playlistsApi;
+export const {
+  useFetchPlaylistsQuery,
+  useCreatePlaylistsMutation,
+  useDeletePlaylistsMutation,
+  useUpdatePlaylistsMutation,
+  useUploadPlaylistCoverMutation,
+  useDeletePlaylistCoverMutation,
+} = playlistsApi;
