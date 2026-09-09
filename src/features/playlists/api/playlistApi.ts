@@ -39,26 +39,60 @@ export const playlistsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Playlist"],
     }),
-    updatePlaylists: build.mutation<
-      void,
-      { playlistId: string; body: UpdatePlaylistArgs }
-    >({
-      query: ({ playlistId, body }) => ({
-        url: `playlists/${playlistId}`,
-        method: "put",
-        body: {
-          data: {
-            type: "playlists",
-            attributes: {
-              title: body.title,
-              description: body.description,
-              tagIds: body.tagIds ?? [],
-            },
-          },
+updatePlaylist: build.mutation<
+  void,
+  { playlistId: string; body: UpdatePlaylistArgs }
+>({
+  query: ({ playlistId, body }) => ({
+    url: `playlists/${playlistId}`,
+    method: "put",
+    body: {
+      data: {
+        type: "playlists",
+        attributes: {
+          title: body.title,
+          description: body.description,
+          tagIds: body.tagIds ?? [],
         },
-      }),
-      invalidatesTags: ["Playlist"],
-    }),
+      },
+    },
+  }),
+  async onQueryStarted({ playlistId, body }, { dispatch, queryFulfilled, getState }) {
+    const args = playlistsApi.util.selectCachedArgsForQuery(getState(), 'fetchPlaylists')
+    const patchResults: any[] = []
+
+    args.forEach(arg => {
+      patchResults.push(
+        dispatch(
+          playlistsApi.util.updateQueryData(
+            'fetchPlaylists',
+            arg, // Передаем arg напрямую, так как он уже содержит правильный формат (например, undefined)
+            state => {
+              const index = state.data.findIndex(playlist => playlist.id === playlistId)
+              if (index !== -1) {
+                state.data[index].attributes = { 
+                  ...state.data[index].attributes, 
+                  title: body.title,
+                  description: body.description,
+                  tagIds: body.tagIds ?? [],
+                }
+              }
+            }
+          )
+        )
+      )
+    })
+
+    try {
+      await queryFulfilled
+    } catch {
+      patchResults.forEach(patchResult => {
+        patchResult.undo()
+      })
+    }
+  },
+  invalidatesTags: ['Playlist'],
+}),
     uploadPlaylistCover: build.mutation<
       Images,
       { playlistId: string; file: File }
@@ -87,7 +121,7 @@ export const {
   useFetchPlaylistsQuery,
   useCreatePlaylistsMutation,
   useDeletePlaylistsMutation,
-  useUpdatePlaylistsMutation,
+  useUpdatePlaylistMutation,
   useUploadPlaylistCoverMutation,
   useDeletePlaylistCoverMutation,
 } = playlistsApi;

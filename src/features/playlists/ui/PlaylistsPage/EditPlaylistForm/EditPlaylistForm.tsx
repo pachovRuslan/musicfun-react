@@ -1,4 +1,4 @@
-import { useUpdatePlaylistsMutation } from "@/features/playlists/api/playlistApi";
+import { useUpdatePlaylistMutation } from "@/features/playlists/api/playlistApi";
 import type { UpdatePlaylistArgs } from "@/features/playlists/api/playlistsApi.types";
 import {   type SubmitHandler, type UseFormHandleSubmit, type UseFormRegister } from "react-hook-form";
 type Props = {
@@ -10,13 +10,13 @@ type Props = {
 }
 
 export const EditPlaylistForm = ({ editPlaylist, playlistId, setPlaylistId,  register, handleSubmit }: Props) => {
-    const [updatePlaylist] = useUpdatePlaylistsMutation();
-    const onSubmit: SubmitHandler<UpdatePlaylistArgs> = (body) => {
-        if (!playlistId) return;
-        updatePlaylist({ playlistId, body }).then(() => {
-            setPlaylistId(null);
-        });
-    };
+  const [updatePlaylist] = useUpdatePlaylistMutation()
+ 
+  const onSubmit: SubmitHandler<UpdatePlaylistArgs> = data => {
+    if (!playlistId) return
+    updatePlaylist({ playlistId, body: data })
+    setPlaylistId(null)
+  }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -40,3 +40,4 @@ export const EditPlaylistForm = ({ editPlaylist, playlistId, setPlaylistId,  reg
         </form>
     );
 };
+

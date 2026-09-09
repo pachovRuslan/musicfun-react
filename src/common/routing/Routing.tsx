@@ -1,7 +1,7 @@
 
 import { PlaylistsPage } from "@/features/playlists/ui/PlaylistsPage/PlaylistsPage"
 import { ProfilePage } from "@/features/playlists/ui/ProfilePage/ProfilePage"
-import { TracksPage } from "@/features/playlists/ui/TracksPage/TracksPage"
+import { TracksPage } from "@/features/tracks/ui/TracksPage"
 import { Route, Routes } from "react-router"
 import { MainPage } from "@/app/ui/MainPage/MainPage"
 import { PageNotFound } from "../components"
