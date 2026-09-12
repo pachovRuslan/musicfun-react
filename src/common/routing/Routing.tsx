@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router"
 import { MainPage } from "@/app/ui/MainPage/MainPage"
 import { PageNotFound } from "../components"
 import { Path } from "./Path"
+import { OAuthCallback } from "@/features/auth/ui/OAuthCallback/OAuthCallback"
 
 
 
@@ -16,5 +17,6 @@ export const Routing = () => (
     <Route path={Path.Tracks} element={<TracksPage />} />
     <Route path={Path.Profile} element={<ProfilePage />} />
     <Route path={Path.NotFound} element={<PageNotFound />} />
+    <Route path={Path.OAuthRedirect} element={<OAuthCallback />} />
   </Routes>
 )
