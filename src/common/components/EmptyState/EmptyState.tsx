@@ -1,5 +1,6 @@
+import type { IconName } from '../Icon/icon'
 import s from './EmptyState.module.css'
-import { Icon, type IconName } from '@/common/components/Icon/Icon'
+import { Icon } from '@/common/components/Icon/Icon'
 
 type Props = {
   title: string
