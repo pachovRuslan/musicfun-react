@@ -66,15 +66,14 @@ updatePlaylist: build.mutation<
         dispatch(
           playlistsApi.util.updateQueryData(
             'fetchPlaylists',
-            arg, // Передаем arg напрямую, так как он уже содержит правильный формат (например, undefined)
+            arg,
             state => {
               const index = state.data.findIndex(playlist => playlist.id === playlistId)
               if (index !== -1) {
-                state.data[index].attributes = { 
-                  ...state.data[index].attributes, 
+                state.data[index].attributes = {
+                  ...state.data[index].attributes,
                   title: body.title,
                   description: body.description,
-                  tagIds: body.tagIds ?? [],
                 }
               }
             }

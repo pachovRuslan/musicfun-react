@@ -1,4 +1,49 @@
-.layout {
-  max-width: 1186px;
-  margin: 0 auto 200px;
+.appShell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: 1fr var(--player-height);
+  grid-template-areas:
+    "sidebar main"
+    "player  player";
+  height: 100vh;
+  width: 100%;
+  background: var(--bg-app);
+  overflow: hidden;
+}
+
+.main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #1a0f2e 0%, var(--bg-app) 320px);
+  padding: 24px 32px 32px;
+}
+
+/* Sidebar area */
+.appShell > :first-child {
+  grid-area: sidebar;
+}
+
+/* PlayerBar is the last child */
+.appShell > :last-child {
+  grid-area: player;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 900px) {
+  .appShell {
+    grid-template-columns: 64px 1fr;
+    --sidebar-width: 64px;
+  }
+  .content {
+    padding: 16px;
+  }
 }

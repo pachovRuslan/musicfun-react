@@ -1,5 +1,64 @@
 .cover {
-  width: 240px;
-  height: 240px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+.placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  opacity: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 8px;
+  transition: opacity 0.2s ease;
+}
+.cover:hover .overlay {
+  opacity: 1;
+}
+
+.uploadBtn,
+.deleteBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.uploadBtn:hover,
+.deleteBtn:hover {
+  background: var(--accent);
+  transform: scale(1.08);
+}
+
+.fileInput {
+  display: none;
 }

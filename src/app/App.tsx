@@ -4,18 +4,24 @@ import s from './App.module.css'
 import { ToastContainer } from "react-toastify"
 import { useGlobalLoading } from "@/common/hooks/useGlobalLoading"
 import { LinearProgress } from "@/common/components/LinearProgress/LinearProgress"
+import { Sidebar } from "@/common/components/Sidebar/Sidebar"
+import { PlayerBar } from "@/common/components/PlayerBar/PlayerBar"
 
 function App() {
   const isGlobalLoading = useGlobalLoading()
   return (
-    <>
-      <Header />
-      {isGlobalLoading && <LinearProgress />}
-      <div className={s.layout}>
-        <Routing />
+    <div className={s.appShell}>
+      <Sidebar />
+      <div className={s.main}>
+        <Header />
+        {isGlobalLoading && <LinearProgress />}
+        <main className={s.content}>
+          <Routing />
+        </main>
       </div>
+      <PlayerBar />
       <ToastContainer />
-    </>
+    </div>
   )
 }
 

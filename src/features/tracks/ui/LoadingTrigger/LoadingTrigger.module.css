@@ -1,0 +1,20 @@
+.root {
+  padding: 8px 0;
+}
+.skeletonRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 8px;
+}
+.spacer {
+  height: 1px;
+}

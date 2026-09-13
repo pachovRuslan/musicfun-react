@@ -1,0 +1,168 @@
+/* ----- Grid card ----- */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  transition: background 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+  position: relative;
+}
+.card:hover {
+  background: var(--bg-elevated-2);
+  transform: translateY(-2px);
+}
+
+.coverWrap {
+  position: relative;
+  aspect-ratio: 1;
+  margin-bottom: 14px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.playBtn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: var(--shadow-accent);
+}
+.card:hover .playBtn {
+  opacity: 1;
+  transform: translateY(0);
+}
+.playBtn:hover {
+  background: var(--accent-hover);
+  transform: scale(1.08);
+}
+
+.menuWrap {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.iconBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.15s ease;
+}
+.card:hover .iconBtn {
+  opacity: 1;
+}
+.iconBtn:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 160px;
+  background: #282828;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-pop);
+  padding: 4px;
+  z-index: 20;
+  animation: dropIn 0.15s ease;
+}
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 3px;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  transition: background 0.1s ease;
+}
+.menuItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+.statItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.liked {
+  color: var(--accent);
+}
+
+/* ----- Row variant ----- */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+}
+.rowActions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+.rowBtn,
+.rowBtnDanger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s ease;
+}
+.rowBtn {
+  background: var(--bg-elevated-2);
+  color: var(--text-primary);
+}
+.rowBtn:hover {
+  background: #333;
+}
+.rowBtnDanger {
+  background: rgba(237, 85, 197, 0.15);
+  color: var(--accent);
+}
+.rowBtnDanger:hover {
+  background: rgba(237, 85, 197, 0.25);
+}

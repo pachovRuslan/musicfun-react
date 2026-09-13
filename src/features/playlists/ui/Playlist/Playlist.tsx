@@ -15,7 +15,7 @@ export const Playlist = ({ isPlaylistsLoading, playlists }: Props) => {
     const { register, handleSubmit, reset } = useForm<UpdatePlaylistArgs>()
     const [deletePlaylist] = useDeletePlaylistsMutation();
     const deletePlaylistHandler = (playlistId: string) => {
-        if (confirm("you sure")) {
+        if (confirm("Delete this playlist?")) {
             deletePlaylist(playlistId);
         }
     };
@@ -31,17 +31,33 @@ export const Playlist = ({ isPlaylistsLoading, playlists }: Props) => {
             setPlaylistId(null);
         }
     };
+
+    if (!playlists.length && !isPlaylistsLoading) {
+        // The PlaylistsPage already renders an EmptyState, so we just return null here.
+        return null;
+    }
+
     return (
         <div className={s.items}>
-            {!playlists.length && !isPlaylistsLoading && <h2>Playlists not found</h2>}
             {playlists.map((playlist) => {
                 const isEditing = playlistId === playlist.id;
                 return (
                     <div className={s.item} key={playlist.id}>
                         {isEditing ? (
-                            <EditPlaylistForm playlistId={playlistId} setPlaylistId={setPlaylistId} editPlaylist={editPlaylistHandler} register={register} handleSubmit={handleSubmit} />
+                            <EditPlaylistForm
+                                playlistId={playlistId}
+                                setPlaylistId={setPlaylistId}
+                                editPlaylist={editPlaylistHandler}
+                                register={register}
+                                handleSubmit={handleSubmit}
+                            />
                         ) : (
-                            <PlaylistItem playlist={playlist} editPlaylistHandler={editPlaylistHandler} deletePlaylistHandler={deletePlaylistHandler} />
+                            <PlaylistItem
+                                playlist={playlist}
+                                editPlaylistHandler={editPlaylistHandler}
+                                deletePlaylistHandler={deletePlaylistHandler}
+                                variant="grid"
+                            />
                         )}
                     </div>
                 );
@@ -49,4 +65,3 @@ export const Playlist = ({ isPlaylistsLoading, playlists }: Props) => {
         </div>
     );
 };
-

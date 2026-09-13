@@ -1,0 +1,96 @@
+/* ----- Compact header pill ----- */
+.loginBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow-accent);
+}
+.loginBtn:hover {
+  background: var(--accent-hover);
+  transform: scale(1.04);
+}
+.loginBtn:active {
+  transform: scale(0.98);
+}
+
+/* ----- Welcome modal ----- */
+.welcomeModal {
+  max-width: 420px;
+}
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+.badge {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-accent);
+}
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 320px;
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+.btnSecondary {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: var(--radius-pill);
+  background: #4a4a4a;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.btnSecondary:hover {
+  background: #555;
+}
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.15s ease, transform 0.1s ease;
+  box-shadow: var(--shadow-accent);
+}
+.btnPrimary:hover {
+  background: var(--accent-hover);
+}
