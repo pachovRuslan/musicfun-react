@@ -1,19 +1,33 @@
-// Компонент, срабатывающий после успешной OAuth авторизации,
-// его цель - отправить код обратно в главное окно приложения и закрыть popup
+import { useEffect } from "react"
+
 export const OAuthCallback = () => {
   useEffect(() => {
-    // Получаем текущий URL
     const url = new URL(window.location.href)
- 
-    // Извлекаем code из параметров запроса
     const code = url.searchParams.get('code')
- 
+
+    // 1. Проверяем в консоли всплывающего окна, пришел ли код и доступен ли opener
+    console.log('[OAuthCallback] Code:', code)
+    console.log('[OAuthCallback] Opener available:', !!window.opener)
+
     if (code && window.opener) {
+      // 2. Отправляем код в основное окно
       window.opener.postMessage({ code }, '*')
+    } else {
+      if (!code) console.error('[OAuthCallback] Параметр "code" не найден в URL')
+      if (!window.opener) console.error('[OAuthCallback] window.opener недоступен')
     }
- 
-    window.close()
+
+    // 3. Даем задержку в 300мс, чтобы postMessage успел обработаться до закрытия окна
+    const timer = setTimeout(() => {
+      window.close()
+    }, 300)
+
+    return () => clearTimeout(timer)
   }, [])
- 
-  return <p>Logging you in...</p>
+
+  return (
+    <div style={{ padding: 20, textAlign: 'center' }}>
+      <p>Logging you in...</p>
+    </div>
+  )
 }
