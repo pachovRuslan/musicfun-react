@@ -1,6 +1,36 @@
 import type { CSSProperties } from 'react'
-import type { IconName } from './icon'
 
+type IconName =
+  | 'home'
+  | 'library'
+  | 'plus'
+  | 'upload'
+  | 'music'
+  | 'list'
+  | 'search'
+  | 'heart'
+  | 'heart-filled'
+  | 'share'
+  | 'more'
+  | 'play'
+  | 'pause'
+  | 'prev'
+  | 'next'
+  | 'shuffle'
+  | 'repeat'
+  | 'volume'
+  | 'clock'
+  | 'close'
+  | 'chevron-down'
+  | 'chevron-left'
+  | 'chevron-right'
+  | 'edit'
+  | 'plus-sm'
+  | 'logout'
+  | 'trash'
+  | 'sparkles'
+  | 'user'
+  | 'image'
 
 type Props = {
   name: IconName
@@ -27,3 +57,4 @@ export const Icon = ({ name, size = 20, className, style }: Props) => (
   </svg>
 )
 
+export type { IconName }

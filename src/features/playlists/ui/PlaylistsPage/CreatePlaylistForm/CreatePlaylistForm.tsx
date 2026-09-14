@@ -1,8 +1,8 @@
 import { useCreatePlaylistsMutation } from "@/features/playlists/api/playlistApi"
 import type { CreatePlaylistArgs } from "@/features/playlists/api/playlistsApi.types"
 import { useForm, type SubmitHandler } from "react-hook-form"
-import { Icon } from "@/common/components/Icon/Icon"
 import s from "./CreatePlaylistForm.module.css"
+import { Icon } from "@/common/components"
 
 type Props = {
   /** When embedded inside a Modal, hide the form header and use modal's title. */

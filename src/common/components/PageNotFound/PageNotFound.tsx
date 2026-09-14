@@ -1,7 +1,9 @@
 import { Link } from 'react-router'
 import s from './PageNotFound.module.css'
 import { Path } from '@/common/routing/Path'
-import { Icon } from '@/common/components/Icon/Icon'
+import { Icon } from '../Icon/Icon'
+
+
 
 export const PageNotFound = () => {
   return (

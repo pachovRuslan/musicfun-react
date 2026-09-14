@@ -1,7 +1,8 @@
 import s from './Sidebar.module.css'
-import { Icon, type IconName } from '@/common/components/Icon/Icon'
+import { Icon, type IconName} from '@/common/components/Icon/Icon'
 import { NavLink } from 'react-router'
 import { Path } from '@/common/routing/Path'
+
 
 type NavItem = {
   to: string
