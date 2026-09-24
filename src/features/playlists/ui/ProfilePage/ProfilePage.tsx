@@ -20,7 +20,6 @@ export const ProfilePage = () => {
 
   return (
     <div className={s.root}>
-      {/* ----- Hero with avatar ----- */}
       <section className={s.hero} style={{ background: heroGradient }}>
         <div className={s.avatar}>{avatarLetter}</div>
         <div className={s.heroInfo}>
@@ -45,12 +44,11 @@ export const ProfilePage = () => {
         </div>
       </section>
 
-      {/* ----- Section title ----- */}
       <div className={s.sectionHead}>
         <h2 className={s.sectionTitle}>My playlists</h2>
       </div>
 
-      {/* ----- Content ----- */}
+
       {isLoading ? (
         <div className={s.grid}>
           {Array.from({ length: 6 }).map((_, i) => (
